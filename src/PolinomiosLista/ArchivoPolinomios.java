@@ -28,6 +28,7 @@ public class ArchivoPolinomios {
     PolinomioListaSimpleConCabeza polN[];
 
      public int ingresar(){
+         borrar();
          System.out.println("Ingreso de Polinomios");
           boolean sw = true;
          String polinomio;
@@ -173,8 +174,8 @@ public class ArchivoPolinomios {
          pol2=polN[p2].getCabeza().getLiga();
 
          }
- 
-         return polC;
+         
+         return simplificar(polC);
      }
      
      public PolinomioListaSimpleConCabeza derivar(int p ){
@@ -211,8 +212,11 @@ public class ArchivoPolinomios {
        return  acum;
      }
      
-     public void borrar(){
-       Fichero.delete();
+     public boolean borrar(){
+         if(Fichero.exists()){
+          return Fichero.delete();
+         }else
+        return false;
      }
      
 }

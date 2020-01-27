@@ -21,6 +21,7 @@ public class Punto1 {
     public static void main(String[] args) {
        Scanner entrada = new Scanner(System.in);
        ArchivoPolinomios poli = new ArchivoPolinomios();
+       
        int cant = poli.ingresar();
        int opc;
        do{
@@ -73,8 +74,6 @@ public class Punto1 {
                 break;
           }
        }while(opc!=0);
-           
-       poli.borrar();
  
     }
     
