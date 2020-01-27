@@ -36,6 +36,7 @@ public class ArchivoPolinomios {
         do {  
              System.out.println("Ingrese el polinomio "+i+":");
              polinomio = entrada.nextLine();
+ 
              Polinomio nuevoPol = new Polinomio(polinomio);
              ListaPolinomios.add(nuevoPol);
              System.out.println("Continuar ingresando polinomios. True/False");
@@ -50,6 +51,31 @@ public class ArchivoPolinomios {
         int cant = i;
         crearTerminos(cant);
         return  cant;
+     }
+     
+     public PolinomioListaSimpleConCabeza simplificar(PolinomioListaSimpleConCabeza sim){
+         Nodo ant = sim.getCabeza().getLiga();
+         Nodo pp =ant;
+         Nodo p = ant.getLiga();
+         
+         while(ant!=null){
+             while(p!=null){
+                 if(ant.getTermino().getE()==p.getTermino().getE()){
+                     ant.getTermino().setC(p.getTermino().getC()+ant.getTermino().getC());
+                     pp.setLiga(p.getLiga());
+                     p=pp.getLiga();
+                 }else{
+                     pp=p;
+                     p=p.getLiga();
+                 }
+             }
+             ant=ant.getLiga();
+             pp=ant;
+             if(ant!=null){
+                 p=ant.getLiga(); 
+             }
+         }
+       return  sim;
      }
      
      public void crearTerminos(int cant){
@@ -121,6 +147,8 @@ public class ArchivoPolinomios {
      
      public PolinomioListaSimpleConCabeza multiplicar(int p1, int p2 ){
          PolinomioListaSimpleConCabeza polC= new PolinomioListaSimpleConCabeza();
+         polN[1]= simplificar(polN[p1]);
+         polN[2]=simplificar(polN[p2]);
          Nodo pol1=polN[p1].getCabeza().getLiga();
          Nodo pol2=polN[p2].getCabeza().getLiga();
          Nodo pol3 = polC.getCabeza();
@@ -145,11 +173,13 @@ public class ArchivoPolinomios {
          pol2=polN[p2].getCabeza().getLiga();
 
          }
+ 
          return polC;
      }
      
      public PolinomioListaSimpleConCabeza derivar(int p ){
        PolinomioListaSimpleConCabeza polC= new PolinomioListaSimpleConCabeza();
+       polN[p]=simplificar(polN[p]);
        Nodo d = polN[p].getCabeza().getLiga();
        Nodo nuevo=polC.getCabeza();
        double coeficiente;
@@ -167,6 +197,7 @@ public class ArchivoPolinomios {
 }
      
      public double Evaluar(int p, double x){
+         polN[p]=simplificar(polN[p]);
          Nodo e = polN[p].getCabeza().getLiga();
          double acum=0;
          double coeficiente;
@@ -178,6 +209,10 @@ public class ArchivoPolinomios {
             e=e.getLiga();
          }
        return  acum;
+     }
+     
+     public void borrar(){
+       Fichero.delete();
      }
      
 }
