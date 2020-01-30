@@ -14,9 +14,9 @@ import java.io.FileReader;
  * @author usuario
  */
 public class ArchivoMatriz {
-    MatrizEnListaLigadaForma1 matriz =new MatrizEnListaLigadaForma1();
+    MatrizEnListaLigadaForma1 matriz[] = new MatrizEnListaLigadaForma1[2];
     
-      public void Crear(String ruta){
+      public void Crear(String ruta, int n){
         try{
             BufferedReader bf = new BufferedReader(new FileReader(ruta));
             String bfRead;
@@ -24,7 +24,7 @@ public class ArchivoMatriz {
             while((bfRead = bf.readLine()) != null){
                 if(fila==0){
                     String[] separado = bfRead.split(" ");
-                    matriz = new MatrizEnListaLigadaForma1(Integer.parseInt(separado[0]), Integer.parseInt(separado[1]));
+                    matriz[n] = new MatrizEnListaLigadaForma1(Integer.parseInt(separado[0]), Integer.parseInt(separado[1]));
                 }else{
                     char[] list = new char[bfRead.length()];
                     list=bfRead.toCharArray();
@@ -34,7 +34,9 @@ public class ArchivoMatriz {
                     }
                     int i=0;
                     for(int columna=1;columna<=bfRead.length();columna++){
-                        matriz.setCelda(fila, columna, num[i]);
+                        if(num[i]!=0){
+                            matriz[n].setCelda(fila, columna, num[i]);
+                        }
                         i++;
                     }
                 }
@@ -44,6 +46,18 @@ public class ArchivoMatriz {
         }catch(Exception e){ 
             System.err.println("No se encontro archivo");
         }
-          System.out.println(matriz);
+          
     }
+      
+      public void mostrarDif(){
+          //System.out.println(matriz[0]);
+          //System.out.println(matriz[1]);
+          int dif = matriz[0].Comparar(matriz[1]);
+          int tamaño = matriz[0].getNodoCabezaMatriz().getT().getF();
+          double porcentaje = (double)((double)dif/(tamaño*tamaño))*100;
+          System.out.println("Hay: "+dif+" numeros de contraste diferentes");
+          System.out.println("Resultado: "+porcentaje+"% de cambios");
+      }
+     
+
 }

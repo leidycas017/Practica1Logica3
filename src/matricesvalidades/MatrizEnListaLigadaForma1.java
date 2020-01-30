@@ -39,8 +39,81 @@ public class MatrizEnListaLigadaForma1 {
         construyeNodosCabeza(numeroFilas, numeroColumnas);
     }
 
-    public MatrizEnListaLigadaForma1() {}
-
+    public int Comparar(MatrizEnListaLigadaForma1 matrizB){
+        NodoDoble M1 = nodoCabezaMatriz;
+        NodoDoble M2 = matrizB.getNodoCabezaMatriz();
+        NodoDoble nodoCabRecorM1 = getLigaNodoCabeza(M1);
+        NodoDoble nodoCabRecorM2 = matrizB.getLigaNodoCabeza(M2);
+        NodoDoble p = nodoCabRecorM1.getLigaF();
+        NodoDoble q = nodoCabRecorM2.getLigaF();
+        int cont = 0;
+        
+        for(int i=1;i<=M1.getT().getF();i++){
+            while(nodoCabRecorM1!=p && nodoCabRecorM2!=q){
+                int columP = p.getT().getC();
+                int columQ = q.getT().getC();
+                if(columP==columQ){
+                    double v1 = (double)p.getT().getV();
+                    double v2 = (double)q.getT().getV();
+                    if(isDiferent(v1, v2)){
+                        cont++;
+                    }
+                    p = p.getLigaF();
+                    q = q.getLigaF();
+                }else{
+                   if(p.getT().getC() < q.getT().getC()){
+                       double v2=0;
+                       double v1=(double)p.getT().getV();
+                       if(isDiferent(v1, v2)){
+                           cont++;
+                       }
+                       p=p.getLigaF();
+                   }else{
+                       double v1=0;
+                       double v2=(double)q.getT().getV();
+                       if (isDiferent(v1, v2)) {
+                           cont++;
+                       }
+                       q=q.getLigaF();
+                   }
+                }
+                
+            }//fin del primer while
+            if(nodoCabRecorM1!=p){
+                while(nodoCabRecorM1!=p){
+                   double v2=0;
+                   if(isDiferent(v2, (double)p.getT().getV())){
+                       cont++;
+                   }
+                   p=p.getLigaF();
+                }
+            }
+            if(nodoCabRecorM2!=q){
+                while(nodoCabRecorM2!=q){
+                   double v1=0;
+                   if(isDiferent(v1, (double)q.getT().getV())){
+                       cont++;
+                   }
+                   q=q.getLigaF();
+                }
+            }
+            nodoCabRecorM1 = getLigaNodoCabeza(nodoCabRecorM1);
+            nodoCabRecorM2 = matrizB.getLigaNodoCabeza(nodoCabRecorM2);
+            p = nodoCabRecorM1.getLigaF();
+            q = nodoCabRecorM2.getLigaF();
+        }
+        
+       return cont;
+    }
+    
+        public boolean isDiferent(double v1, double v2){
+            double dif = v2-v1;
+            if(dif <= -5.0 || dif >= 5.0){
+                return true;
+            }
+            return false;
+        }
+    
     /**
      *
      * @param numeroFilas
@@ -213,6 +286,8 @@ public class MatrizEnListaLigadaForma1 {
             ultimoNodoDeColumna.setLigaC(nuevoNodoRegistro);
         }
     }
+    
+
 
     @Override
     public String toString() {
