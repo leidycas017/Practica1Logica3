@@ -38,7 +38,15 @@ public class MatrizEnListaLigadaForma1 {
     MatrizEnListaLigadaForma1(int numeroFilas, int numeroColumnas) {
         construyeNodosCabeza(numeroFilas, numeroColumnas);
     }
-
+    
+    /**
+     * Metodo para comparar dos Matrices
+     * Se recorren ambas matrices por filas
+     * recorre los nodos cabezas de filas-columnas y sus respectivos nodos asociados por filas
+     * con p (para la matriz 1) y q (para la matriz 2)
+     * @param matrizB segunda matriz para hacer la comparación
+     * @return valor del contador de diferencias
+     */   
     public int Comparar(MatrizEnListaLigadaForma1 matrizB){
         NodoDoble M1 = nodoCabezaMatriz;
         NodoDoble M2 = matrizB.getNodoCabezaMatriz();
@@ -104,15 +112,21 @@ public class MatrizEnListaLigadaForma1 {
         }
         
        return cont;
-    }
-    
-        public boolean isDiferent(double v1, double v2){
+    } 
+    /**
+     * Metodo para evaluar diferencia entre dos valores
+     * 
+     * @param v1 valor de la tripleta 1
+     * @param v2 valor de la tripleta 2
+     * @return valor booleano si cumple o no con la condición  5 ( + ó - ) de diferencia
+     */ 
+    public boolean isDiferent(double v1, double v2){
             double dif = v2-v1;
             if(dif <= -5.0 || dif >= 5.0){
                 return true;
             }
             return false;
-        }
+    }
     
     /**
      *

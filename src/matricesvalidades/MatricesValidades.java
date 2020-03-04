@@ -5,19 +5,15 @@
  */
 package matricesvalidades;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Scanner;
 
 /**
  *
- * @author usuario
+ * @author G1_T1
  */
 public class MatricesValidades {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         ArchivoMatriz a = new ArchivoMatriz();
         Scanner entrada = new Scanner(System.in);
