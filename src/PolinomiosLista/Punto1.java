@@ -18,7 +18,7 @@ public class Punto1 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
        Scanner entrada = new Scanner(System.in);
        ArchivoPolinomios poli = new ArchivoPolinomios();
        
@@ -57,6 +57,13 @@ public class Punto1 {
                 System.out.println("\n");
                 break;
                case 4:
+                   System.out.println("Ingrese el número del dividendo");
+                   int dividendo = entrada.nextInt();
+                   System.out.println("Ingrese el número del divisor");
+                   int divisor = entrada.nextInt();
+                   System.out.println("El resultado de la división es:");
+                   poli.dividir(dividendo, divisor);
+                   System.out.println(poli.dividir(dividendo, divisor));
                    break;
                case 5:
                 System.out.println("Ingrese número del polinomio a derivar");
