@@ -79,6 +79,29 @@ public class ArchivoPolinomios {
        return  sim;
      }
      
+    public PolinomioListaSimpleConCabeza ordenar(PolinomioListaSimpleConCabeza ord){
+        Nodo p = ord.getCabeza().getLiga();
+        Nodo pp;
+        int tempE;
+        double tempC;
+        while(p.getLiga()!= null){
+            pp = p.getLiga();
+            while(pp!=null){
+                if(pp.getTermino().getE() < p.getTermino().getE()){
+                    tempC = p.getTermino().getC();
+                    tempE = p.getTermino().getE();
+                    p.getTermino().setC(pp.getTermino().getC());
+                    p.getTermino().setE(pp.getTermino().getE());
+                    pp.getTermino().setC(tempC);
+                    pp.getTermino().setE(tempE);
+                }
+                pp=pp.getLiga();
+            }
+            p=p.getLiga();
+        }
+        return ord;
+    }
+     
      public void crearTerminos(int cant){
            int p=1;
            polN= new PolinomioListaSimpleConCabeza[cant+1];
@@ -93,13 +116,18 @@ public class ArchivoPolinomios {
                     cA= polN[p].getCabeza();
                 }
                 String[] separado = bfRead.split(" ");
-                for(int i=0; i<separado.length; i=i+2){
+                int numTerm = separado.length;
+                if(numTerm % 2 == 0){
+                    for(int i=0; i<separado.length; i=i+2){
                     double c = Double.parseDouble(separado[i]);
                     int e = Integer.parseInt(separado[i+1]);
                     Termino t = new Termino(e,c);
-                     Nodo n = new Nodo(t);
-                     cA.setLiga(n);
-                     cA = n;
+                    Nodo n = new Nodo(t);
+                    cA.setLiga(n);
+                    cA = n;
+                } 
+                }else{
+                    System.err.println("Faltó ingresar exponentes");
                 }
                 p++;
             }
@@ -125,31 +153,39 @@ public class ArchivoPolinomios {
         }
     }
      
-     public void leerTxt(){ 
-        String texto = "";
-        try{
-            BufferedReader bf = new BufferedReader(new FileReader(Fichero));
-            String temp = "";
-            String bfRead;
-            while((bfRead = bf.readLine()) != null){ 
-                temp += bfRead +"\n"; //guardado el texto del archivo
-            }
-            texto = temp;
-        }catch(Exception e){ 
-            System.err.println("No se encontro archivo");
-        }
-        System.out.println(texto);
-    }
      
      public PolinomioListaSimpleConCabeza Mostrar(int p){
-         return polN[p];
+         return ordenar(polN[p]);
      }
      
-     
+     public void dividir(int p1, int p2) throws Exception{
+         PolinomioListaSimpleConCabeza polCociente= new PolinomioListaSimpleConCabeza();
+         Nodo CA = polCociente.getCabeza();
+         polN[p1] = ordenar(simplificar(polN[p1]));
+         polN[p2] = ordenar(simplificar(polN[p2]));
+         PolinomioListaSimpleConCabeza divisor = new PolinomioListaSimpleConCabeza();
+         divisor =polN[1];
+         int gradoCociente = divisor.getGrado() - polN[p2].getGrado();
+         while(divisor.getGrado()>=polN[2].getGrado()){
+            Nodo p = polN[1].getCabeza().getLiga();
+            Nodo pp = polN[2].getCabeza().getLiga();
+            int exp = divisor.getGrado() - polN[2].getGrado();
+            double coe = p.getTermino().getC()/pp.getTermino().getC();
+            Termino t = new Termino(exp,coe);
+            Nodo n = new Nodo(t);
+            CA.setLiga(n);
+            divisor.sumar(CambiarSigno(multiplicar(polCociente,polN[2])));
+            
+            
+            
+            
+         }
+     }
+         
      public PolinomioListaSimpleConCabeza multiplicar(int p1, int p2 ){
          PolinomioListaSimpleConCabeza polC= new PolinomioListaSimpleConCabeza();
-         polN[1]= simplificar(polN[p1]);
-         polN[2]=simplificar(polN[p2]);
+         polN[p1]= simplificar(polN[p1]);
+         polN[p2]=simplificar(polN[p2]);
          Nodo pol1=polN[p1].getCabeza().getLiga();
          Nodo pol2=polN[p2].getCabeza().getLiga();
          Nodo pol3 = polC.getCabeza();
@@ -174,8 +210,78 @@ public class ArchivoPolinomios {
          pol2=polN[p2].getCabeza().getLiga();
 
          }
+         polC = simplificar(polC);
+         polC = ordenar(polC);
+         return polC;
+     }
+     
+       public PolinomioListaSimpleConCabeza CambiarSigno(PolinomioListaSimpleConCabeza p1){
+         PolinomioListaSimpleConCabeza polC= new PolinomioListaSimpleConCabeza();
+         PolinomioListaSimpleConCabeza p2 = new PolinomioListaSimpleConCabeza();
+         Nodo CA = p2.getCabeza();
+         Termino q = new  Termino(0,-1);
+         Nodo n = new Nodo(q);
+         p1= simplificar(p1);
+         Nodo pol1=p1.getCabeza().getLiga();
+         Nodo pol2=p2.getCabeza().getLiga();
+         Nodo pol3 = polC.getCabeza();
+
+         double coeficiente1,coeficiente2;
+         int exponente1,exponente2;
          
-         return simplificar(polC);
+         while(!(p1.finRecorrido(pol1))){
+             while(!(p2.finRecorrido(pol2)) ){
+            coeficiente1=pol1.getTermino().getC();
+            exponente1=pol1.getTermino().getE();
+            coeficiente2=pol2.getTermino().getC();
+            exponente2=pol2.getTermino().getE();
+            
+             Termino t = new Termino(exponente1+exponente2, coeficiente1*coeficiente2);
+             Nodo m = new Nodo(t);
+             pol3.setLiga(m);
+             pol3 = m;
+             pol2=pol2.getLiga();
+         }
+         pol1=pol1.getLiga();
+         pol2=p2.getCabeza().getLiga();
+
+         }
+         polC = simplificar(polC);
+         polC = ordenar(polC);
+         return polC;
+     }
+     
+    public PolinomioListaSimpleConCabeza multiplicar(PolinomioListaSimpleConCabeza p1, PolinomioListaSimpleConCabeza p2 ){
+         PolinomioListaSimpleConCabeza polC= new PolinomioListaSimpleConCabeza();
+         p1= simplificar(p1);
+         p2=simplificar(p2);
+         Nodo pol1=p1.getCabeza().getLiga();
+         Nodo pol2=p2.getCabeza().getLiga();
+         Nodo pol3 = polC.getCabeza();
+
+         double coeficiente1,coeficiente2;
+         int exponente1,exponente2;
+         
+         while(!(p1.finRecorrido(pol1))){
+             while(!(p2.finRecorrido(pol2)) ){
+            coeficiente1=pol1.getTermino().getC();
+            exponente1=pol1.getTermino().getE();
+            coeficiente2=pol2.getTermino().getC();
+            exponente2=pol2.getTermino().getE();
+            
+             Termino t = new Termino(exponente1+exponente2, coeficiente1*coeficiente2);
+             Nodo n = new Nodo(t);
+             pol3.setLiga(n);
+             pol3 = n;
+             pol2=pol2.getLiga();
+         }
+         pol1=pol1.getLiga();
+         pol2=p2.getCabeza().getLiga();
+
+         }
+         polC = simplificar(polC);
+         polC = ordenar(polC);
+         return polC;
      }
      
      public PolinomioListaSimpleConCabeza derivar(int p ){
