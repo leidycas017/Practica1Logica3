@@ -128,7 +128,7 @@ public class PolinomioListaSimpleConCabeza {
         }
 
         // Si la lista de terminos del polinomio b finalizo primero
-        while (!finRecorrido(prB)) {
+        while (!finRecorrido(prA)) {
             // Variables para exponente y coefiente de lista polinomio a
             int eA = prA.getTermino().getE();
             double cA = prA.getTermino().getC();
@@ -142,7 +142,7 @@ public class PolinomioListaSimpleConCabeza {
         }
 
         // Si la lista de terminos del polinomio a finalizo primero
-        while (!finRecorrido(prA)) {
+        while (!finRecorrido(prB)) {
             // Variables para exponente y coefiente de lista polinomio a
             int eB = prB.getTermino().getE();
             double cB = prB.getTermino().getC();
