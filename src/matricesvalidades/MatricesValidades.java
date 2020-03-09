@@ -14,9 +14,9 @@ import java.util.Scanner;
  * Este número de contraste es un número del 0 al 9
  * donde 0 es que no hay contraste y 9 el mayor contraste
  * Instancia variable de tipo ArchivoMatriz para acceder a los metodos
- * @author: G1_T1
+ * @author: Leidy Castaño Castaño
  * @version: 04/03/2020
- * @see <a href = "https://github.com/YulyAR/logica3-polinomios.git" /> Url de Repositorio en Github - Polinomio representado en Vector Forma1 </a>
+ * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
  */
 public class MatricesValidades {
 

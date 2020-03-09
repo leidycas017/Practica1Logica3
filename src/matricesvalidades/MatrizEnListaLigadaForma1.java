@@ -46,6 +46,9 @@ public class MatrizEnListaLigadaForma1 {
      * con p (para la matriz 1) y q (para la matriz 2)
      * @param matrizB segunda matriz para hacer la comparación
      * @return valor del contador de diferencias
+     * @author: Leidy Castaño Castaño
+     * @version: 04/03/2020
+     * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
      */   
     public int Comparar(MatrizEnListaLigadaForma1 matrizB){
         NodoDoble M1 = nodoCabezaMatriz;
@@ -118,6 +121,9 @@ public class MatrizEnListaLigadaForma1 {
      * 
      * @param v1 valor de la tripleta 1
      * @param v2 valor de la tripleta 2
+     * @author: Leidy Castaño Castaño
+     * @version: 04/03/2020
+     * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
      * @return valor booleano si cumple o no con la condición  5 ( + ó - ) de diferencia
      */ 
     public boolean isDiferent(double v1, double v2){

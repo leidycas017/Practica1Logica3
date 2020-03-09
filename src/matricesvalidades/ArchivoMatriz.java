@@ -13,7 +13,9 @@ import java.io.FileReader;
  * Se crea un vector de la clase MatrizEnListaLigadaForma1 con dos posiciones 
  * Estos crean una instancia para llamar los metodos de la clase
  * Permite crear Matriz y Mostrar resultados
- * @author: G1_T1
+ * @author: Leidy Castaño Castaño
+ * @version: 04/03/2020
+ * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
  */
 public class ArchivoMatriz {
     MatrizEnListaLigadaForma1 matriz[] = new MatrizEnListaLigadaForma1[2];

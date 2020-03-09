@@ -18,8 +18,17 @@ import javax.swing.JOptionPane;
 import polinomios.util.Termino;
 
 /**
- *
- * @author usuario
+ * Se ingresa una cadena del polinomio, coeficiente espacio exponente,
+ * se ingresa en un arraylist y se crean los terminos
+ * del polinomio en lista ligada con cabeza
+ * se desarrollan los siguientes metodos:
+ * Simplificar, ordenar, mostrar, dividir,multiplicar,
+ * cambiar signo,derivar, evaluar.
+ * @author Leidy Castaño
+ * @version: 03/03/2020/A
+ * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
+ * 
+ * 
  */
 public class ArchivoPolinomios {
     private ArrayList<Polinomio> ListaPolinomios;

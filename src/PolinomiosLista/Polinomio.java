@@ -7,7 +7,8 @@ package PolinomiosLista;
 
 /**
  *
- * @author usuario
+ * @author: Leidy Castaño Castaño 1040753589
+ * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
  */
 public class Polinomio {
     String polinomio;
@@ -24,26 +25,4 @@ public class Polinomio {
     public void setPolinomio(String polinomio) {
         this.polinomio = polinomio;
     }
-    /*
-    public void simplificar(){
-          double coeficiente;
-          int exponente;
-          double suma;
-        String[] separado = polinomio.split(" ");
-        String[] nuevo;
-         for(int i=0; i<separado.length; i=i+2){
-             coeficiente = Double.parseDouble(separado[i]);
-             exponente = Integer.parseInt(separado[i+1]);
-             
-             
-             for(int j=3;j<separado.length;j++){
-                 if(exponente == Double.parseDouble(separado[j])){
-                     suma= coeficiente+Double.parseDouble(separado[j-1]);
-                 }
-                 j=j+2;
-             }
- 
-         }
-          }
-    */
 }

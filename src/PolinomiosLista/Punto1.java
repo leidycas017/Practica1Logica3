@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 
 /**
- *
- * @author usuario
+ ** @author: Leidy Castaño Castaño 1040753589
+ * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
  */
 public class Punto1 {
 

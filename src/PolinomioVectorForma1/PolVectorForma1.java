@@ -9,7 +9,6 @@ package PolinomioVectorForma1;
  *
  * @author: Yuly Alvear
  * @author: Brian Vanegas
- * @author: Leidy Castaño
  */
 public class PolVectorForma1 {
 

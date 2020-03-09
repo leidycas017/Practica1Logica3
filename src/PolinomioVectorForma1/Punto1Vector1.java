@@ -24,7 +24,6 @@ import java.util.Scanner;
  *
  * @author: Yuly Alvear
  * @author: Brian Vanegas
- * @author: Leidy Castaño
  * @version: 03/03/2020/A
  * @see <a href = "https://github.com/leidycas017/Practica1Logica3.git" /> Url
  * de Repositorio en Github - Polinomio representado en Vector Forma1 </a>
