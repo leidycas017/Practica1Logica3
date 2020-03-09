@@ -37,6 +37,8 @@ public class Punto1Vector1 {
         int Ex = 0;
         int Co = 0;
         Scanner teclado = new Scanner(System.in);
+        Scanner confirmacionAddPolinomios = new Scanner(System.in);
+        int addPoliniomios = 0;
         // Guardar cada polinomio ingresado en una Lista
         List<PolVectorForma1> misPolinomios = new ArrayList<>();
 
@@ -62,8 +64,12 @@ public class Punto1Vector1 {
             System.out.println(polinomio);
             misPolinomios.add(polinomio);
             Co = 0;
-            //Garantizar el ingreso de minimo 10 polinomios 
-        } while (misPolinomios.size() < 2);
+            if(misPolinomios.size() >= 10) {
+                System.out.println("Desea seguir agregando polinomios? Si, digite 1, No digite 0");
+                addPoliniomios = confirmacionAddPolinomios.nextInt();
+            }
+            //Garantizar el ingreso de minimo 10 polinomios
+        } while (misPolinomios.size() < 10 || addPoliniomios == 1);
 
         do {
             // Menu para la manipulacion de polinomios

@@ -5,10 +5,6 @@
  */
 package PolinomioVectorForma1;
 
-import static java.lang.Math.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  *
  * @author: Yuly Alvear
@@ -109,9 +105,19 @@ public class PolVectorForma1 {
                 int j = arregloA[i];
                 // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
                 if (j >= 0 && i != 1) {
-                    polinomio.append("+");
+                    polinomio.append(" +");
                 }
-                polinomio.append(j).append("X^").append(getExponente(i)).append(" ");
+                //polinomio.append(j).append("X^").append(getExponente(i)).append(" ");
+                switch (getExponente(i)) {
+                    case 0:
+                        polinomio.append(j);
+                        break;
+                    case 1:
+                        polinomio.append(j).append("X");
+                        break;
+                    default:
+                        polinomio.append(j).append("X^").append(getExponente(i));
+                }
             }
         } catch (Exception e) {
             polinomio.append("El arreglo estaba NULO");

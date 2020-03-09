@@ -54,16 +54,28 @@ public class PolinomioListaSimpleConCabeza {
     public String toString() {
         StringBuilder polinomio = new StringBuilder();
         Nodo p = cabeza.getLiga();
+        int pr = 0;
         while (!finRecorrido(p)) {
             Termino ti = p.getTermino();
             double j = ti.getC();
             int i = ti.getE();
             // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
-            if (j >= 0) {
-                polinomio.append("+");
+            if (j >= 0 && pr > 0) {
+                polinomio.append(" +");
             }
-            polinomio.append(j).append("X^").append(i).append(" ");
+            //polinomio.append(j).append("X^").append(i).append(" ");
+            switch (i) {
+                case 0:
+                    polinomio.append(j);
+                    break;
+                case 1:
+                    polinomio.append(j).append("X");
+                    break;
+                default:
+                    polinomio.append(j).append("X^").append(i);
+            }
             p = p.getLiga();
+            pr++;
         }
         return polinomio.toString();
     }
