@@ -159,29 +159,41 @@ public class ArchivoPolinomios {
      }
      
      public PolinomioListaSimpleConCabeza dividir(int p1, int p2) throws Exception{
-         PolinomioListaSimpleConCabeza polCociente= new PolinomioListaSimpleConCabeza();
-         Nodo CA = polCociente.getCabeza();
-         polN[p1] = ordenar(simplificar(polN[p1]));
-         polN[p2] = ordenar(simplificar(polN[p2]));
+       PolinomioListaSimpleConCabeza polCociente= new PolinomioListaSimpleConCabeza();
+       Nodo CA = polCociente.getCabeza();
+       polN[p1] = ordenar(simplificar(polN[p1]));
+       polN[p2] = ordenar(simplificar(polN[p2]));
+       if(polN[1].getGrado()>polN[2].getGrado()){
          PolinomioListaSimpleConCabeza dividendo = new PolinomioListaSimpleConCabeza();
          dividendo =polN[1];
          
          int gradoCociente = dividendo.getGrado() - polN[p2].getGrado();
-         while(dividendo.getGrado()>=polN[2].getGrado()){
-            Nodo p = polN[1].getCabeza().getLiga();
-            Nodo pp = polN[2].getCabeza().getLiga();
+         Nodo p = polN[1].getCabeza().getLiga();
+         Nodo pp = polN[2].getCabeza().getLiga();
+         while(dividendo!=null && dividendo.getGrado()>=polN[2].getGrado()){
             int exp = dividendo.getGrado() - polN[2].getGrado();
             double coe = p.getTermino().getC()/pp.getTermino().getC();
             Termino t = new Termino(exp,coe);
             Nodo n = new Nodo(t);
             CA.setLiga(n);
-            PolinomioListaSimpleConCabeza multiplicacion = multiplicar(polCociente,polN[2]);
+            CA=n;
+            PolinomioListaSimpleConCabeza ult = new  PolinomioListaSimpleConCabeza();
+            Nodo Cu = ult.getCabeza();
+            Nodo m=CA;
+            Cu.setLiga(m);
+            PolinomioListaSimpleConCabeza multiplicacion = multiplicar(ult,polN[2]);
             PolinomioListaSimpleConCabeza cambioSigno = CambiarSigno(multiplicacion);
             dividendo = dividendo.sumar(cambioSigno);
             //dividendo = dividendo.sumar(CambiarSigno(multiplicar(polCociente,polN[2])));
-            ordenar(dividendo);
-         }
-         return polCociente;
+            if(dividendo.getCabeza().getLiga()!=null){
+              ordenar(dividendo);
+              p=dividendo.getCabeza().getLiga();
+            }
+          }
+         }else{
+           System.out.println("El dividendo debe ser de mayor grado");
+       }
+          return polCociente;
      }
          
      public PolinomioListaSimpleConCabeza multiplicar(int p1, int p2 ){
